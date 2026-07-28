@@ -1,6 +1,10 @@
 # CodeNote
 
-A macOS desktop app for **quick code notes** — jot a snippet in seconds, find and reuse it in seconds. Built for the capture-and-retrieve loop that heavier snippet managers make slow.
+<p align="center">
+  <img src="codenote.png" width="120" alt="CodeNote icon" />
+</p>
+
+CodeNote is a menu-bar macOS app for **quick code notes**: press **⌘⇧K** to capture a snippet from anywhere and it's saved as a plain Markdown file you own. It packs syntax highlighting, instant search, tags, reusable `{{templates}}`, and a keyboard-first command palette (**⌘K**) — built with **Tauri 2**, **React + TypeScript**, and **CodeMirror 6**.
 
 ## Why
 
