@@ -12,6 +12,7 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import { open } from "@tauri-apps/plugin-dialog";
 import { enable, disable, isEnabled } from "@tauri-apps/plugin-autostart";
 import { copyToClipboard } from "./clipboard";
+import { runUpdateCheck } from "./updater";
 import FillModal from "./components/FillModal";
 import CommandPalette, { type PaletteAction } from "./components/CommandPalette";
 import PinIcon from "./components/PinIcon";
@@ -131,6 +132,15 @@ export default function App() {
       un.then((f) => f());
     };
   }, [reload]);
+
+  // Silent update check on launch; tray "Check for Updates…" triggers a manual one.
+  useEffect(() => {
+    runUpdateCheck(false);
+    const un = listen("update:check", () => runUpdateCheck(true));
+    return () => {
+      un.then((f) => f());
+    };
+  }, []);
 
   // "Open in main app" from quick capture: surface the window and open that note.
   useEffect(() => {

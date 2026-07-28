@@ -2,7 +2,7 @@ use tauri::{
     image::Image,
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
-    AppHandle, Manager, WindowEvent,
+    AppHandle, Emitter, Manager, WindowEvent,
 };
 use tauri_plugin_global_shortcut::{
     Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState,
@@ -41,6 +41,8 @@ pub fn run() {
             None,
         ))
         .plugin(tauri_plugin_global_shortcut::Builder::new().build())
+        .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_process::init())
         .plugin(
             tauri_plugin_window_state::Builder::default()
                 .with_state_flags(StateFlags::POSITION | StateFlags::SIZE)
@@ -56,8 +58,10 @@ pub fn run() {
             let open_i = MenuItem::with_id(app, "open", "Open CodeNote", true, None::<&str>)?;
             let capture_i =
                 MenuItem::with_id(app, "capture", "Quick Capture", true, Some("Cmd+Shift+K"))?;
+            let update_i =
+                MenuItem::with_id(app, "update", "Check for Updates…", true, None::<&str>)?;
             let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
-            let menu = Menu::with_items(app, &[&open_i, &capture_i, &quit_i])?;
+            let menu = Menu::with_items(app, &[&open_i, &capture_i, &update_i, &quit_i])?;
             // Dedicated monochrome template glyph for the macOS menu bar.
             let tray_icon = Image::from_bytes(include_bytes!("../icons/tray-icon.png"))?;
             TrayIconBuilder::new()
@@ -81,6 +85,10 @@ pub fn run() {
                 .on_menu_event(|app, event| match event.id.as_ref() {
                     "open" => show_main(app),
                     "capture" => toggle_capture(app),
+                    "update" => {
+                        show_main(app);
+                        let _ = app.emit("update:check", ());
+                    }
                     "quit" => app.exit(0),
                     _ => {}
                 })
