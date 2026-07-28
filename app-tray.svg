@@ -1,0 +1,12 @@
+<svg width="44" height="44" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
+    <!-- document with a folded corner, centered and enlarged -->
+    <path d="M6.7 2.5 H15.3 L19.5 6.7 V19.3 A2.2 2.2 0 0 1 17.3 21.5
+             H6.7 A2.2 2.2 0 0 1 4.5 19.3 V4.7 A2.2 2.2 0 0 1 6.7 2.5 Z"
+          stroke-width="1.8"/>
+    <path d="M15.3 2.5 V6.7 H19.5" stroke-width="1.8"/>
+    <!-- code chevrons  < >  -->
+    <polyline points="10.6 10.4 8.4 13.2 10.6 16" stroke-width="1.7"/>
+    <polyline points="13.4 10.4 15.6 13.2 13.4 16" stroke-width="1.7"/>
+  </g>
+</svg>
