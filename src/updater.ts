@@ -12,7 +12,7 @@ export async function runUpdateCheck(manual: boolean): Promise<void> {
     const update = await check();
     if (update) {
       const yes = await ask(
-        `Jot ${update.version} is available (you have ${update.currentVersion}).\n\nDownload and install now?`,
+        `Stash ${update.version} is available (you have ${update.currentVersion}).\n\nDownload and install now?`,
         { title: "Update available", kind: "info" }
       );
       if (yes) {
@@ -21,7 +21,7 @@ export async function runUpdateCheck(manual: boolean): Promise<void> {
       }
     } else if (manual) {
       await message("You’re on the latest version.", {
-        title: "Jot",
+        title: "Stash",
         kind: "info",
       });
     }
@@ -29,7 +29,7 @@ export async function runUpdateCheck(manual: boolean): Promise<void> {
     // Network hiccups / no release yet are silent unless the user asked.
     if (manual) {
       await message(`Update check failed:\n${err}`, {
-        title: "Jot",
+        title: "Stash",
         kind: "error",
       });
     }

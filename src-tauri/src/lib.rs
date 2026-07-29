@@ -55,7 +55,7 @@ pub fn run() {
             app.set_activation_policy(tauri::ActivationPolicy::Accessory);
 
             // Menu-bar tray with quick actions.
-            let open_i = MenuItem::with_id(app, "open", "Open Jot", true, None::<&str>)?;
+            let open_i = MenuItem::with_id(app, "open", "Open Stash", true, None::<&str>)?;
             let capture_i =
                 MenuItem::with_id(app, "capture", "Quick Capture", true, Some("Cmd+Shift+K"))?;
             let update_i =
@@ -67,7 +67,7 @@ pub fn run() {
             TrayIconBuilder::new()
                 .icon(tray_icon)
                 .icon_as_template(true)
-                .tooltip("Jot")
+                .tooltip("Stash")
                 .menu(&menu)
                 // Left-click the menu-bar icon → open Quick Capture instantly.
                 // (The menu stays available on right-click.)

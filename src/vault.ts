@@ -18,14 +18,14 @@ import {
 export type { Note } from "./vault-format";
 export { serialize, parse, normalizeTags } from "./vault-format";
 
-const VAULT_KEY = "jot-vault-dir";
+const VAULT_KEY = "stash-vault-dir";
 let cachedVault: string | null = null;
 
 /** Ensure a vault folder is configured and exists; returns its path. */
 export async function initVault(): Promise<string> {
   let path = localStorage.getItem(VAULT_KEY);
   if (!path) {
-    path = await join(await documentDir(), "JotVault");
+    path = await join(await documentDir(), "StashVault");
     localStorage.setItem(VAULT_KEY, path);
   }
   if (!(await exists(path))) {

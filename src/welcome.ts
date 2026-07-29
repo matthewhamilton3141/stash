@@ -9,7 +9,7 @@ export const WELCOME_DEFAULT_LANGUAGE = "markdown";
 
 export const WELCOME_SNIPPETS: Record<string, string> = {
   markdown: [
-    "# Welcome to Jot 👋",
+    "# Welcome to Stash 👋",
     "",
     "Quick notes for code you'll want again — plain Markdown files you own.",
     "**Switch the language dropdown above ↗** to see this note in each language.",
@@ -22,7 +22,7 @@ export const WELCOME_SNIPPETS: Record<string, string> = {
   ].join("\n"),
 
   plaintext: [
-    "Welcome to Jot",
+    "Welcome to Stash",
     "",
     "Switch the language dropdown above to see this note in each language.",
     "",
@@ -71,7 +71,7 @@ export const WELCOME_SNIPPETS: Record<string, string> = {
   html: [
     "<!-- 👋 Switch the language dropdown above to view this in other languages. -->",
     '<main class="welcome">',
-    "  <h1>Welcome to Jot</h1>",
+    "  <h1>Welcome to Stash</h1>",
     "  <p>Press <kbd>⌘K</kbd> for the command palette.</p>",
     "  <p>Press <kbd>⌘⇧K</kbd> to capture from anywhere.</p>",
     "</main>",

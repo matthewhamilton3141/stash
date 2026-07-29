@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCurrentWebview } from "@tauri-apps/api/webview";
 
-const KEY = "jot-zoom";
+const KEY = "stash-zoom";
 const MIN = 0.6;
 const MAX = 2.2;
 const STEP = 0.1;

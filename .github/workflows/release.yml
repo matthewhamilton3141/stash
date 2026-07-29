@@ -35,19 +35,19 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           tagName: ${{ github.ref_name }}
-          releaseName: "Jot ${{ github.ref_name }}"
+          releaseName: "Stash ${{ github.ref_name }}"
           releaseBody: "Download the .dmg to install. Existing installs update automatically."
           releaseDraft: true
           prerelease: false
           args: --target universal-apple-darwin
 
       # Publish a stable-named copy so the site can link to a permanent
-      # /releases/latest/download/Jot.dmg URL that never changes per version.
-      - name: Attach stable-named Jot.dmg
+      # /releases/latest/download/Stash.dmg URL that never changes per version.
+      - name: Attach stable-named Stash.dmg
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          DMG=$(find src-tauri/target -name 'Jot_*_universal.dmg' | head -1)
+          DMG=$(find src-tauri/target -name 'Stash_*_universal.dmg' | head -1)
           echo "Found $DMG"
-          cp "$DMG" Jot.dmg
-          gh release upload "${{ github.ref_name }}" Jot.dmg --clobber
+          cp "$DMG" Stash.dmg
+          gh release upload "${{ github.ref_name }}" Stash.dmg --clobber
