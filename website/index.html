@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeNote — code you'll want again, a keystroke away</title>
+    <meta
+      name="description"
+      content="A macOS menu-bar app for quick code notes. Hit ⌘⇧K from any app to capture a snippet, find it and copy it back just as fast. Every note is a plain Markdown file you own."
+    />
+    <link rel="icon" href="assets/codenote.png" />
+    <meta property="og:title" content="CodeNote" />
+    <meta
+      property="og:description"
+      content="Code you'll want again, a keystroke away. A macOS menu-bar app for quick code notes — Markdown files you own."
+    />
+    <meta property="og:image" content="assets/codenote.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- The nav is a faux macOS menu bar — the app lives here. -->
+    <header class="macbar">
+      <div class="macbar-inner">
+        <a class="brand" href="#top">
+          <img src="assets/tray.svg" alt="" class="brand-glyph" />
+          <span>CodeNote</span>
+        </a>
+        <nav class="macbar-nav">
+          <a href="#loop">How it works</a>
+          <a href="#features">Features</a>
+          <a href="https://github.com/matthewhamilton3141/CodeNote" target="_blank" rel="noopener">GitHub</a>
+        </nav>
+        <a class="macbar-time" href="#download">Download</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">macOS menu-bar app</p>
+          <h1>Code you'll want again,<br /><span class="grad">a keystroke away.</span></h1>
+          <p class="lede">
+            Press <kbd class="kbd">⌘⇧K</kbd> from any app to capture a snippet. Find it and
+            copy it back just as fast. Every note is a plain Markdown file you own —
+            no database, no account.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://github.com/matthewhamilton3141/CodeNote/releases/latest" target="_blank" rel="noopener">
+              Download for macOS
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/matthewhamilton3141/CodeNote" target="_blank" rel="noopener">
+              View source
+            </a>
+          </div>
+          <p class="fineprint">Free &amp; open source · Signed auto-updates · Apple Silicon &amp; Intel</p>
+        </div>
+
+        <!-- Signature: the capture window, dropped from the menu bar -->
+        <div class="hero-demo" aria-hidden="true">
+          <div class="drop-line"></div>
+          <div class="capture-win">
+            <div class="capture-top">
+              <span class="capture-title">Quick note</span>
+              <span class="chip chip-blue">JavaScript</span>
+              <span class="kbd kbd-sm">⌘⇧K</span>
+            </div>
+            <pre class="code"><code><span class="c-key">const</span> debounce = (<span class="c-var">fn</span>, <span class="c-var">ms</span>) <span class="c-key">=&gt;</span> {
+  <span class="c-key">let</span> <span class="c-var">t</span>;
+  <span class="c-key">return</span> (...<span class="c-var">args</span>) <span class="c-key">=&gt;</span> {
+    <span class="c-fn">clearTimeout</span>(<span class="c-var">t</span>);
+    <span class="c-var">t</span> = <span class="c-fn">setTimeout</span>(() <span class="c-key">=&gt;</span> <span class="c-fn">fn</span>(...<span class="c-var">args</span>), <span class="c-var">ms</span>);
+  };
+};<span class="caret"></span></code></pre>
+            <div class="capture-hint">
+              <span><span class="kbd kbd-xs">⌘⏎</span> save</span>
+              <span><span class="kbd kbd-xs">⌘K</span> palette</span>
+              <span><span class="kbd kbd-xs">esc</span> dismiss</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- The loop: a real three-step sequence, so it earns numbers -->
+      <section class="loop" id="loop">
+        <p class="eyebrow center">The loop</p>
+        <h2 class="section-h">Jot in two seconds. Find it in two seconds.</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-n">01</span>
+            <h3><span class="dot dot-blue"></span>Capture</h3>
+            <p>Hit ⌘⇧K anywhere. Paste code and the language is auto-detected. ⌘⏎ saves and you're back where you were.</p>
+          </li>
+          <li class="step">
+            <span class="step-n">02</span>
+            <h3><span class="dot dot-green"></span>Find</h3>
+            <p>Full-text search as you type, or the ⌘K command palette to jump straight to any note — keyboard only.</p>
+          </li>
+          <li class="step">
+            <span class="step-n">03</span>
+            <h3><span class="dot dot-amber"></span>Reuse</h3>
+            <p>One click copies the snippet. Notes with <code>{{placeholders}}</code> ask you to fill them in first.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Features, tagged with syntax-color tokens -->
+      <section class="features" id="features">
+        <div class="feat">
+          <span class="token token-blue">// capture</span>
+          <h3>Quick capture from anywhere</h3>
+          <p>A global hotkey drops a capture window over whatever you're doing. Stash a snippet without breaking flow, then expand it into the full app if you want more room.</p>
+        </div>
+        <div class="feat">
+          <span class="token token-green">// own</span>
+          <h3>Your notes are just files</h3>
+          <p>Each note is a Markdown file in a folder you choose. Point it at iCloud or a Git repo and you've got sync — no server, no lock-in, greppable forever.</p>
+        </div>
+        <div class="feat">
+          <span class="token token-purple">// highlight</span>
+          <h3>Real syntax highlighting</h3>
+          <p>CodeMirror-powered highlighting for ten languages, light and dark themes, and language auto-detection the moment you paste.</p>
+        </div>
+        <div class="feat">
+          <span class="token token-amber">// find</span>
+          <h3>Search &amp; command palette</h3>
+          <p>Instant full-text search over titles, bodies and tags. ⌘K opens a fuzzy palette to jump to notes or run actions — no mouse required.</p>
+        </div>
+        <div class="feat">
+          <span class="token token-blue">// reuse</span>
+          <h3>Snippets that are templates</h3>
+          <p>Drop <code>{{name}}</code> placeholders into a note. On copy, CodeNote asks for the values and hands back a filled-in snippet.</p>
+        </div>
+        <div class="feat">
+          <span class="token token-green">// update</span>
+          <h3>Signed auto-updates</h3>
+          <p>Updates are delivered straight from GitHub Releases and verified with a minisign signature. No App Store, no manual reinstall.</p>
+        </div>
+      </section>
+
+      <!-- Real artifact: a note on disk -->
+      <section class="files">
+        <div class="files-copy">
+          <p class="eyebrow">Nothing to lock in</p>
+          <h2 class="section-h left">A note is a file you can read.</h2>
+          <p class="files-lede">
+            Metadata lives in YAML frontmatter; the snippet is a fenced code block.
+            Open it in any editor, render it on GitHub, back it up by copying a folder.
+          </p>
+          <ul class="files-list">
+            <li><span class="dot dot-blue"></span> Plain Markdown, human-readable</li>
+            <li><span class="dot dot-green"></span> Tags, pins &amp; usage in frontmatter</li>
+            <li><span class="dot dot-amber"></span> Sync via iCloud, Dropbox or Git</li>
+          </ul>
+        </div>
+        <div class="file-card">
+          <div class="file-top">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="file-name">debounce-helper.md</span>
+          </div>
+          <pre class="code"><code><span class="c-fence">---</span>
+<span class="c-fm">title:</span> Debounce helper
+<span class="c-fm">language:</span> javascript
+<span class="c-fm">tags:</span> [utils, react]
+<span class="c-fm">pinned:</span> <span class="c-key">true</span>
+<span class="c-fm">copies:</span> 12
+<span class="c-fence">---</span>
+
+<span class="c-fence">```javascript</span>
+<span class="c-key">export const</span> debounce = (<span class="c-var">fn</span>, <span class="c-var">ms</span>) <span class="c-key">=&gt;</span> { <span class="c-comment">/* … */</span> };
+<span class="c-fence">```</span></code></pre>
+        </div>
+      </section>
+
+      <!-- Download -->
+      <section class="download" id="download">
+        <img src="assets/codenote.png" alt="CodeNote icon" class="download-icon" />
+        <h2>Keep your code a keystroke away.</h2>
+        <p>macOS 12+. Free and open source.</p>
+        <div class="cta-row center">
+          <a class="btn btn-primary" href="https://github.com/matthewhamilton3141/CodeNote/releases/latest" target="_blank" rel="noopener">
+            Download for macOS
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/matthewhamilton3141/CodeNote" target="_blank" rel="noopener">
+            Star on GitHub
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>CodeNote</span>
+      <span class="foot-mono">stash it · find it · paste it</span>
+      <a href="https://github.com/matthewhamilton3141/CodeNote" target="_blank" rel="noopener">github.com/matthewhamilton3141/CodeNote</a>
+    </footer>
+  </body>
+</html>
