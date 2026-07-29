@@ -1,14 +1,14 @@
-# CodeNote
+# Jot
 
 <p align="center">
-  <img src="codenote.png" width="120" alt="CodeNote icon" />
+  <img src="jot.png" width="120" alt="Jot icon" />
 </p>
 
-CodeNote is a menu-bar macOS app for **quick code notes**: press **⌘⇧K** to capture a snippet from anywhere and it's saved as a plain Markdown file you own. It packs syntax highlighting, instant search, tags, reusable `{{templates}}`, and a keyboard-first command palette (**⌘K**) — built with **Tauri 2**, **React + TypeScript**, and **CodeMirror 6**.
+Jot is a menu-bar macOS app for **quick code notes**: press **⌘⇧K** to capture a snippet from anywhere and it's saved as a plain Markdown file you own. It packs syntax highlighting, instant search, tags, reusable `{{templates}}`, and a keyboard-first command palette (**⌘K**) — built with **Tauri 2**, **React + TypeScript**, and **CodeMirror 6**.
 
 ## Why
 
-Most snippet managers (SnippetsLab, massCode, Dash…) are *libraries* — foldered, heavy, built for curating collections. CodeNote optimizes the two moments that actually matter: **capturing** a snippet without breaking flow, and **retrieving** it instantly, keyboard-first.
+Most snippet managers (SnippetsLab, massCode, Dash…) are *libraries* — foldered, heavy, built for curating collections. Jot optimizes the two moments that actually matter: **capturing** a snippet without breaking flow, and **retrieving** it instantly, keyboard-first.
 
 ## Features
 
@@ -41,7 +41,7 @@ Most snippet managers (SnippetsLab, massCode, Dash…) are *libraries* — folde
 - **Plain Markdown files** as storage (frontmatter + fenced body), read/written via `tauri-plugin-fs`; folder chosen via `tauri-plugin-dialog`
 - Plugins: fs, dialog, clipboard-manager, global-shortcut, autostart
 
-Notes live as `.md` files in your vault folder (default `~/Documents/CodeNoteVault`,
+Notes live as `.md` files in your vault folder (default `~/Documents/JotVault`,
 changeable from the command palette → "Change notes folder…"). Each file looks like:
 
 ```markdown

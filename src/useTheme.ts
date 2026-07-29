@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 export type ThemeMode = "light" | "dark";
 
-const STORAGE_KEY = "codenote-theme";
+const STORAGE_KEY = "jot-theme";
 
 function initialTheme(): ThemeMode {
   const stored = localStorage.getItem(STORAGE_KEY);

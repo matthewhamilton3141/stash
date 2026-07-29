@@ -1,4 +1,4 @@
-// Seed a CodeNote vault with the pinned welcome note. Its language is
+// Seed a Jot vault with the pinned welcome note. Its language is
 // switchable in-app (the top-right dropdown swaps the body per language).
 //
 //   node --experimental-strip-types scripts/seed-vault.mjs [vaultDir]
@@ -15,7 +15,7 @@ import {
   WELCOME_SNIPPETS,
 } from "../src/welcome.ts";
 
-const vault = process.argv[2] || join(homedir(), "Documents", "CodeNoteVault");
+const vault = process.argv[2] || join(homedir(), "Documents", "JotVault");
 
 await mkdir(vault, { recursive: true });
 
@@ -30,7 +30,7 @@ const now = Date.now();
 const note = {
   id: WELCOME_ID,
   path: "",
-  title: "Welcome to CodeNote",
+  title: "Welcome to Jot",
   body: WELCOME_SNIPPETS[WELCOME_DEFAULT_LANGUAGE],
   language: WELCOME_DEFAULT_LANGUAGE,
   tags: ["welcome"],
@@ -42,7 +42,7 @@ const note = {
 };
 
 await writeFile(
-  join(vault, `welcome-to-codenote-${WELCOME_ID}.md`),
+  join(vault, `welcome-to-jot-${WELCOME_ID}.md`),
   serialize(note),
   "utf8"
 );

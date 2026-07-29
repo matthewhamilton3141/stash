@@ -432,7 +432,7 @@ export default function App() {
     <div className="app">
       <aside className="sidebar">
         <header className="sidebar-header">
-          <span className="brand">CodeNote</span>
+          <span className="brand">Jot</span>
           <div className="header-actions">
             <button
               className="btn icon"

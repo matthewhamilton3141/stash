@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "CodeNote",
+  "productName": "Jot",
   "version": "0.1.0",
-  "identifier": "com.matthew.codenote",
+  "identifier": "com.matthew.jot",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "CodeNote",
+        "title": "Jot",
         "width": 1000,
         "height": 680,
         "minWidth": 720,
@@ -52,7 +52,7 @@
   "plugins": {
     "updater": {
       "endpoints": [
-        "https://github.com/matthewhamilton3141/CodeNote/releases/latest/download/latest.json"
+        "https://github.com/matthewhamilton3141/jot/releases/latest/download/latest.json"
       ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IERGRUIyRkVENjdDRkFGMTAKUldRUXI4OW43Uy9yMzkxK0haUFRBQXpTZFhydHFmcFg3RHd5WlBYUkhBRDFQb3NZcnF3RFNINmwK"
     }

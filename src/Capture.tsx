@@ -93,7 +93,7 @@ export default function Capture() {
       { id: "open", label: "Open in main app", hint: "⌘O", run: expand },
       {
         id: "main",
-        label: "Open CodeNote (main window)",
+        label: "Open Jot (main window)",
         hint: "Window",
         run: async () => {
           await emit("note:open", { id: null });
