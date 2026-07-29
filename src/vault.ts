@@ -6,7 +6,7 @@ import {
   remove,
   exists,
 } from "@tauri-apps/plugin-fs";
-import { documentDir, join } from "@tauri-apps/api/path";
+import { appLocalDataDir, join } from "@tauri-apps/api/path";
 import {
   parse,
   serialize,
@@ -18,14 +18,20 @@ import {
 export type { Note } from "./vault-format";
 export { serialize, parse, normalizeTags } from "./vault-format";
 
-const VAULT_KEY = "stash-vault-dir";
+// Bumped from "stash-vault-dir": the default now lives in the app's own data
+// dir (not ~/Documents), so macOS never prompts for Documents access.
+const VAULT_KEY = "stash-vault";
 let cachedVault: string | null = null;
 
 /** Ensure a vault folder is configured and exists; returns its path. */
 export async function initVault(): Promise<string> {
   let path = localStorage.getItem(VAULT_KEY);
   if (!path) {
-    path = await join(await documentDir(), "StashVault");
+    // ~/Library/Application Support/com.matthew.stash/vault — not a TCC-protected
+    // location, so there's no permission prompt. Users can point it anywhere
+    // (incl. iCloud/Documents) via "Change notes folder…", which grants access
+    // through the file picker with no recurring prompts.
+    path = await join(await appLocalDataDir(), "vault");
     localStorage.setItem(VAULT_KEY, path);
   }
   if (!(await exists(path))) {

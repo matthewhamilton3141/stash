@@ -6,6 +6,20 @@
 
 Stash is a menu-bar macOS app for **quick code notes**: press **⌘⇧K** to capture a snippet from anywhere and it's saved as a plain Markdown file you own. It packs syntax highlighting, instant search, tags, reusable `{{templates}}`, and a keyboard-first command palette (**⌘K**) — built with **Tauri 2**, **React + TypeScript**, and **CodeMirror 6**.
 
+## Install
+
+Download the latest `.dmg` and drag **Stash** into Applications:
+
+**https://github.com/matthewhamilton3141/stash/releases/latest/download/Stash.dmg**
+
+Stash isn't notarized yet (no paid Apple Developer account), so on first launch
+macOS quarantines it (*"Stash is damaged and can't be opened"*). Clear the
+quarantine attribute once, then open it normally:
+
+```bash
+xattr -cr /Applications/Stash.app
+```
+
 ## Why
 
 Most snippet managers (SnippetsLab, massCode, Dash…) are *libraries* — foldered, heavy, built for curating collections. Stash optimizes the two moments that actually matter: **capturing** a snippet without breaking flow, and **retrieving** it instantly, keyboard-first.
@@ -41,8 +55,10 @@ Most snippet managers (SnippetsLab, massCode, Dash…) are *libraries* — folde
 - **Plain Markdown files** as storage (frontmatter + fenced body), read/written via `tauri-plugin-fs`; folder chosen via `tauri-plugin-dialog`
 - Plugins: fs, dialog, clipboard-manager, global-shortcut, autostart
 
-Notes live as `.md` files in your vault folder (default `~/Documents/StashVault`,
-changeable from the command palette → "Change notes folder…"). Each file looks like:
+Notes live as `.md` files in your vault folder (default
+`~/Library/Application Support/com.matthew.stash/vault`, so macOS never prompts
+for Documents access — changeable from the command palette → "Change notes
+folder…", including iCloud/Documents). Each file looks like:
 
 ```markdown
 ---

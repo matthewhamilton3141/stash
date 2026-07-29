@@ -15,7 +15,9 @@ import {
   WELCOME_SNIPPETS,
 } from "../src/welcome.ts";
 
-const vault = process.argv[2] || join(homedir(), "Documents", "StashVault");
+const vault =
+  process.argv[2] ||
+  join(homedir(), "Library", "Application Support", "com.matthew.stash", "vault");
 
 await mkdir(vault, { recursive: true });
 
