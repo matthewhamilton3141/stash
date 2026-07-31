@@ -15,6 +15,8 @@ import { copyToClipboard } from "./clipboard";
 import { runUpdateCheck } from "./updater";
 import FillModal from "./components/FillModal";
 import CommandPalette, { type PaletteAction } from "./components/CommandPalette";
+import SettingsMenu from "./components/SettingsMenu";
+import GearIcon from "./components/GearIcon";
 import PinIcon from "./components/PinIcon";
 import {
   hasPlaceholders,
@@ -56,6 +58,7 @@ export default function App() {
     placeholders: Placeholder[];
   } | null>(null);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [sortMode, setSortMode] = useState<"recent" | "used">("recent");
   const [autostart, setAutostart] = useState(false);
   const { theme, toggle } = useTheme();
@@ -341,6 +344,20 @@ export default function App() {
     }
   }, [flush]);
 
+  const toggleAutostart = useCallback(async () => {
+    try {
+      if (autostart) {
+        await disable();
+        setAutostart(false);
+      } else {
+        await enable();
+        setAutostart(true);
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [autostart]);
+
   // Global shortcuts: ⌘K palette, ⌘F search, ⌘⇧C copy selected note.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -380,19 +397,13 @@ export default function App() {
         id: "autostart",
         label: autostart ? "Disable launch at login" : "Enable launch at login",
         hint: "System",
-        run: async () => {
-          try {
-            if (autostart) {
-              await disable();
-              setAutostart(false);
-            } else {
-              await enable();
-              setAutostart(true);
-            }
-          } catch {
-            /* ignore */
-          }
-        },
+        run: toggleAutostart,
+      },
+      {
+        id: "update",
+        label: "Check for updates…",
+        hint: "System",
+        run: () => runUpdateCheck(true),
       },
     ];
     if (selected) {
@@ -422,6 +433,7 @@ export default function App() {
     theme,
     changeVault,
     autostart,
+    toggleAutostart,
     selected,
     copyNote,
     togglePin,
@@ -502,6 +514,31 @@ export default function App() {
             onCopy={copyNote}
           />
         )}
+
+        <footer className="sidebar-footer">
+          <div className="settings-wrap">
+            <button
+              className="settings-trigger"
+              onClick={() => setSettingsOpen((o) => !o)}
+              title="Settings"
+              aria-label="Settings"
+              aria-haspopup="menu"
+              aria-expanded={settingsOpen}
+            >
+              <GearIcon size={14} />
+              <span>Settings</span>
+            </button>
+            {settingsOpen && (
+              <SettingsMenu
+                autostart={autostart}
+                onToggleAutostart={toggleAutostart}
+                onChangeVault={changeVault}
+                onCheckUpdates={() => runUpdateCheck(true)}
+                onClose={() => setSettingsOpen(false)}
+              />
+            )}
+          </div>
+        </footer>
       </aside>
 
       <main className="editor-pane">
