@@ -1,8 +1,9 @@
+use std::sync::atomic::{AtomicU32, Ordering};
 use tauri::{
     image::Image,
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
-    AppHandle, Emitter, Manager, WindowEvent,
+    AppHandle, Emitter, Manager, PhysicalPosition, WebviewUrl, WebviewWindowBuilder, WindowEvent,
 };
 use tauri_plugin_global_shortcut::{
     Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState,
@@ -19,6 +20,34 @@ fn toggle_capture(app: &AppHandle) {
             let _ = win.show();
             let _ = win.set_focus();
         }
+    }
+}
+
+static CAPTURE_WINDOW_COUNTER: AtomicU32 = AtomicU32::new(0);
+
+/// Open a brand-new, independent quick-capture window (⌘⇧N). Unlike the
+/// singleton "capture" window this is never reused — it closes for good
+/// when dismissed or saved (see `hide()` in Capture.tsx).
+fn new_capture_window(app: &AppHandle) {
+    let n = CAPTURE_WINDOW_COUNTER.fetch_add(1, Ordering::Relaxed);
+    let label = format!("capture-{n}");
+    let build = WebviewWindowBuilder::new(app, &label, WebviewUrl::App("index.html".into()))
+        .title("Quick Capture")
+        .inner_size(640.0, 420.0)
+        .decorations(false)
+        .always_on_top(true)
+        .skip_taskbar(true)
+        .center()
+        .build();
+    if let Ok(win) = build {
+        // Cascade so repeated presses don't stack windows exactly on top of each other.
+        if n > 0 {
+            if let Ok(pos) = win.outer_position() {
+                let offset = (n % 8) as i32 * 24;
+                let _ = win.set_position(PhysicalPosition::new(pos.x + offset, pos.y + offset));
+            }
+        }
+        let _ = win.set_focus();
     }
 }
 
@@ -112,6 +141,15 @@ pub fn run() {
                 .on_shortcut(hotkey, move |app, _shortcut, event| {
                     if event.state() == ShortcutState::Pressed {
                         toggle_capture(app);
+                    }
+                })?;
+
+            // Global new-capture-window hotkey: Cmd/Ctrl + Shift + N.
+            let new_window_hotkey = Shortcut::new(Some(Modifiers::SUPER | Modifiers::SHIFT), Code::KeyN);
+            app.global_shortcut()
+                .on_shortcut(new_window_hotkey, move |app, _shortcut, event| {
+                    if event.state() == ShortcutState::Pressed {
+                        new_capture_window(app);
                     }
                 })?;
 

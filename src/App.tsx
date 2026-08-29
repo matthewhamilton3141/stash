@@ -619,7 +619,10 @@ export default function App() {
         <CommandPalette
           notes={notes}
           actions={paletteActions}
-          onOpenNote={handleSelect}
+          onOpenNote={(id) => {
+            handleSelect(id);
+            focusEditor();
+          }}
           onClose={() => setPaletteOpen(false)}
         />
       )}

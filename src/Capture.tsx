@@ -31,8 +31,16 @@ export default function Capture() {
     setLanguage("plaintext");
   }, []);
 
+  // The singleton "capture" window (toggled via ⌘⇧K) hides so it can be
+  // shown again instantly. Windows spawned by ⌘⇧N ("capture-0", "capture-1",
+  // …) are one-shot, so dismiss them for real instead of leaking hidden windows.
   const hide = useCallback(async () => {
-    await getCurrentWindow().hide();
+    const win = getCurrentWindow();
+    if (win.label === "capture") {
+      await win.hide();
+    } else {
+      await win.close();
+    }
   }, []);
 
   const reloadNotes = useCallback(() => {
